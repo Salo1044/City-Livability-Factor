@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Livability Scores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .city-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .city-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .city-score {
+            font-size: 1.1rem;
+            color: #2e86de;
+            font-weight: bold;
+        }
+        .rank {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>City Livability Scores</h1>
+    <div id="results"></div>
+
+    <script>
+        fetch('/api/livability')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('results');
+                data.cities.forEach((city, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'city-card';
+                    card.innerHTML = `
+                        <div>
+                            <span class="rank">#${index + 1}</span>
+                            <span class="city-name">${city.city_name}, ${city.city_state}</span>
+                        </div>
+                        <span class="city-score">${city.livability_score}</span>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(err => {
+                document.getElementById('results').innerHTML = '<p>Failed to load data.</p>';
+                console.error(err);
+            });
+    </script>
+</body>
+</html>

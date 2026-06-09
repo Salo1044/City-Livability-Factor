@@ -1,0 +1,27 @@
+CREATE DATABASE city_data_github;
+
+USE city_data_github;
+
+CREATE TABLE city_livability_data(
+city_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+city_name 	VARCHAR(33)				NOT NULL,
+city_state 	CHAR(2) 				NOT NULL,
+violent_crime_rate 	DECIMAL(6, 2) 	NOT NULL,
+property_crime_rate DECIMAL(6, 2) 	NOT NULL,
+walkability_score 	TINYINT UNSIGNED NOT NULL 	CHECK (walkability_score BETWEEN 0 AND 100),
+transit_score 		TINYINT UNSIGNED			CHECK (transit_score BETWEEN 0 AND 100),
+bike_score 			TINYINT UNSIGNED			CHECK (bike_score BETWEEN 0 AND 100)
+);
+
+#Creating a row example
+insert into city_livability_data (city_name, city_state, violent_crime_rate, property_crime_rate, walkability_score, transit_score, bike_score, secret_metric)
+VALUES 	();
+
+select * from city_livability_data;
+
+#Example with values
+insert into city_livability_data (city_name, city_state, violent_crime_rate, property_crime_rate, walkability_score, transit_score, bike_score)
+VALUES 	("Tampa", "FL", 4.42, 14.91, 50, 31, 55),
+		("Columbus", "OH", 4.29, 26.64, 41, 30, 48);
+
+select * from city_livability_data;
