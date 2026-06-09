@@ -14,7 +14,7 @@ bike_score 			TINYINT UNSIGNED			CHECK (bike_score BETWEEN 0 AND 100)
 );
 
 #Creating a row example
-insert into city_livability_data (city_name, city_state, violent_crime_rate, property_crime_rate, walkability_score, transit_score, bike_score, secret_metric)
+insert into city_livability_data (city_name, city_state, violent_crime_rate, property_crime_rate, walkability_score, transit_score, bike_score)
 VALUES 	();
 
 select * from city_livability_data;
