@@ -16,6 +16,16 @@
             text-align: center;
             margin-bottom: 24px;
         }
+        .filter-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .filter-bar select {
+            padding: 8px 12px;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
         .city-card {
             background: white;
             border-radius: 8px;
@@ -44,25 +54,61 @@
 </head>
 <body>
     <h1>City Livability Scores</h1>
+
+    <div class="filter-bar">
+        <label for="stateFilter">Filter by state: </label>
+        <select id="stateFilter">
+            <option value="all">All States</option>
+        </select>
+    </div>
+
     <div id="results"></div>
 
     <script>
+        let allCities = [];
+
+        function renderCities(cities) {
+            const container = document.getElementById('results');
+            container.innerHTML = '';
+            cities.forEach((city, index) => {
+                const card = document.createElement('div');
+                card.className = 'city-card';
+                card.innerHTML = `
+                    <div>
+                        <span class="rank">#${index + 1}</span>
+                        <span class="city-name">${city.city_name}, ${city.city_state}</span>
+                    </div>
+                    <span class="city-score">${city.livability_score}</span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function populateStateOptions(cities) {
+            const select = document.getElementById('stateFilter');
+            const states = [...new Set(cities.map(c => c.city_state))].sort();
+            states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                select.appendChild(option);
+            });
+        }
+
+        document.getElementById('stateFilter').addEventListener('change', (e) => {
+            const selected = e.target.value;
+            const filtered = selected === 'all'
+                ? allCities
+                : allCities.filter(city => city.city_state === selected);
+            renderCities(filtered);
+        });
+
         fetch('/api/livability')
             .then(res => res.json())
             .then(data => {
-                const container = document.getElementById('results');
-                data.cities.forEach((city, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'city-card';
-                    card.innerHTML = `
-                        <div>
-                            <span class="rank">#${index + 1}</span>
-                            <span class="city-name">${city.city_name}, ${city.city_state}</span>
-                        </div>
-                        <span class="city-score">${city.livability_score}</span>
-                    `;
-                    container.appendChild(card);
-                });
+                allCities = data.cities;
+                populateStateOptions(allCities);
+                renderCities(allCities);
             })
             .catch(err => {
                 document.getElementById('results').innerHTML = '<p>Failed to load data.</p>';
