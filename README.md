@@ -9,46 +9,18 @@ A full-stack web application that ranks U.S. cities by livability using a weight
 ## How It Works
 Cities are scored using a weighted formula across five metrics, ranked from most to least important:
 
-|
-Metric
-|
-Weight
-|
-|
----
-|
----
-|
-|
-Violent Crime rate
-|
-5
-|
-|
-Property Crime rate
-|
-4
-|
-|
-Walk Score
-|
-3
-|
-|
-Transit Score
-|
-2
-|
-|
-Bike Score
-|
-1
-|
+| Metric | Weight |
+|---|---|
+| Violent Crime Rate | 5 |
+| Property Crime Rate | 4 |
+| Walk Score | 3 |
+| Transit Score | 2 |
+| Bike Score | 1 |
 
 Crime rates are normalized and inverted so lower crime rates result in better scores. Walk, Transit, and Bike scores use Walk Score's 0-100 scale. The final livability score is a weighted sum of all normalized metrics.
 
 ## Setup
-###Prerequisites
+### Prerequisites
 - Node.js
 - MySQL
 
