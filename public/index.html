@@ -50,6 +50,19 @@
             font-size: 0.95rem;
             margin-right: 12px;
         }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        footer a {
+            color: #2e86de;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -115,5 +128,11 @@
                 console.error(err);
             });
     </script>
+    <footer>
+        <p>Data Sources:
+            <a href="https://www.neighborhoodscout.com" target="_blank">NeighborhoodScout</a> (crime data) &nbsp;|&nbsp;
+            <a href="https://www.walkscore.com" target="_blank">Walk Score</a> (walkability & transit data)
+        </p>
+    </footer>
 </body>
 </html>
