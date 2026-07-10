@@ -50,6 +50,12 @@
             font-size: 0.95rem;
             margin-right: 12px;
         }
+        .city-population {
+            display: block;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 2px;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -87,12 +93,13 @@
                 const card = document.createElement('div');
                 card.className = 'city-card';
                 card.innerHTML = `
-                    <div>
-                        <span class="rank">#${index + 1}</span>
-                        <span class="city-name">${city.city_name}, ${city.city_state}</span>
-                    </div>
-                    <span class="city-score">${city.livability_score}</span>
-                `;
+                <div>
+                    <span class="rank">#${index + 1}</span>
+                    <span class="city-name">${city.city_name}, ${city.city_state}</span>
+                    <span class="city-population">${Number(city.population_2020).toLocaleString()}</span>
+                </div>
+                <span class="city-score">${city.livability_score}</span>
+            `;
                 container.appendChild(card);
             });
         }

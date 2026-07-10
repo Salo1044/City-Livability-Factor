@@ -7,6 +7,7 @@ const scoringQuery = `
     SELECT
         city_name,
         city_state,
+        population_2020,
         violent_crime_rate,
         property_crime_rate,
         walkability_score,
