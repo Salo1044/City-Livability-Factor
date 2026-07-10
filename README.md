@@ -62,7 +62,7 @@ Crime rates are normalized and inverted so lower crime rates result in better sc
 Manually entered the data from sources listed above
 
 ## Future Plans
-- Include population filter (i.e. Only list cities with population above 200k)
+- Include population filter (i.e. Only list cities with population above 200k) ✅
 - Include sources page on application frontend
 - Add picture of city to each entry
 - Cost of Living metric addition
