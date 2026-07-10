@@ -13,6 +13,10 @@ transit_score 		TINYINT UNSIGNED			CHECK (transit_score BETWEEN 0 AND 100),
 bike_score 			TINYINT UNSIGNED			CHECK (bike_score BETWEEN 0 AND 100)
 );
 
+#Added population column
+ALTER TABLE city_livability_data
+ADD population_2020 INT NOT NULL AFTER city_state;
+
 #Creating a row example
 insert into city_livability_data (city_name, city_state, violent_crime_rate, property_crime_rate, walkability_score, transit_score, bike_score)
 VALUES 	();
