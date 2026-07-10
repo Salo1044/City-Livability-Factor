@@ -79,6 +79,11 @@
         <select id="stateFilter">
             <option value="all">All States</option>
         </select>
+        &nbsp;&nbsp;
+        <label>
+            <input type="checkbox" id="populationFilter">
+            Cities over 200,000 population
+        </label>
     </div>
 
     <div id="results"></div>
@@ -104,6 +109,17 @@
             });
         }
 
+         function getFilteredCities() {
+            const selectedState = document.getElementById('stateFilter').value;
+            const popOnly = document.getElementById('populationFilter').checked;
+            
+            return allCities.filter(city => {
+                const stateMatch = selectedState === 'all' || city.city_state === selectedState;
+                const popMatch = !popOnly || city.population_2020 > 200000;
+                return stateMatch && popMatch;
+            });
+        }
+
         function populateStateOptions(cities) {
             const select = document.getElementById('stateFilter');
             const states = [...new Set(cities.map(c => c.city_state))].sort();
@@ -115,12 +131,12 @@
             });
         }
 
-        document.getElementById('stateFilter').addEventListener('change', (e) => {
-            const selected = e.target.value;
-            const filtered = selected === 'all'
-                ? allCities
-                : allCities.filter(city => city.city_state === selected);
-            renderCities(filtered);
+        document.getElementById('stateFilter').addEventListener('change', () => {
+            renderCities(getFilteredCities());
+        });
+
+        document.getElementById('populationFilter').addEventListener('change', () => {
+            renderCities(getFilteredCities());
         });
 
         fetch('/api/livability')
