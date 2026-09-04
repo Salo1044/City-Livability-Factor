@@ -1,0 +1,28 @@
+{
+  "name": "city-livability-factor",
+  "version": "1.0.0",
+  "description": "A full-stack web application that ranks U.S. cities by livability using a weighted scoring system based on crime rates and access to various transportation methods",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Salo1044/City-Livability-Factor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Salo1044/City-Livability-Factor/issues"
+  },
+  "homepage": "https://github.com/Salo1044/City-Livability-Factor#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "mysql2": "^3.24.3"
+  }
+}
